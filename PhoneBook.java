@@ -1,42 +1,44 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PhoneBook
 {
-	public static void main(String[] args) 
-	{
-		Scanner in= new Scanner(System.in);
+    public static void main(String [] args)
+    {
+        Scanner scan = new Scanner(System.in);
 
-		System.out.println("Enter no of contacts to be stored");
+        System.out.println("Enter the size of phone book");
 
-		int n=in.nextInt();
+        int n= scan.nextInt();
 
-		String [] cNames = new String[n];
+        Map<String,String> pBook = new HashMap<>();
 
-		Integer[] phoneNumbers= new Integer[n];
+        System.out.println("Enter the contacts with name and number");
+        for(int i=0;i<n;i++)
+        {
+            pBook.put(scan.next(),scan.next());
+        }
+        System.out.println("All contacts are Saved");
 
-		for(int i=0;i<n;i++)
-		{
-			cNames[i]=in.next();
+        System.out.println("Enter name to display there number or enter EXIT to Stop Searching");
+        while (scan.hasNext())
+        {
+            String s =scan.next();
 
-			phoneNumbers[i]=in.nextInt();
-		}
+            if (s.equalsIgnoreCase("EXIT"))
+                break;
 
-		while (in.hasNext()) 
-		{
-			String s=in.next();
+            if(pBook.containsKey(s))
+            {
+                System.out.println(s+"="+pBook.get(s));
+            }
+            else
+            {
+                System.out.println("Not found");
+            }
+        }
 
-			int i=0;
 
-			for(i=0;i<n;i++)
-			{
-				if (s.equals(cNames[i]) )
-					break;
-			}
-			if(i==n)
-				System.out.println("Not found");
-			else
-				System.out.println(cNames[i]+"="+phoneNumbers[i]);
-		}
-
-	}
+    }
 }
